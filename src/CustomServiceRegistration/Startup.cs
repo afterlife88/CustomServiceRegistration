@@ -21,16 +21,15 @@ namespace CustomServiceRegistration
 			services.AddDbContext<DataDbContext>(options => options.UseSqlServer(connection));
 
 			services.AddIdentity<ApplicationUser, IdentityRole>()
-				.AddEntityFrameworkStores<DataDbContext>()
-				.AddDefaultTokenProviders();
-
+			.AddEntityFrameworkStores<DataDbContext>();
+			
 			services.AddMvc().AddJsonOptions(options =>
 			{
 				options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 				options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 			}).AddWebApiConventions();
 
-			/*Adding swagger generation with default settings*/
+			//Adding swagger generation with default settings
 			services.AddSwaggerGen(options =>
 			{
 				options.SingleApiVersion(new Info
@@ -46,23 +45,10 @@ namespace CustomServiceRegistration
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			//app.UseIdentity();
-
-			app.UseMvc(routes =>
-			{
-				routes.MapWebApiRoute(
-					name: "apiRoute",
-					template: "api/{controller}/{action}");
-
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=Home}/{action=Index}");
-			});
+			app.UseMvc();
 			app.UseSwagger();
 			app.UseSwaggerUi();
-
-			//CreateSampleData(app.ApplicationServices);
-
+			app.UseWelcomePage();
 		}
 
 		//private static async void CreateSampleData(IServiceProvider applicationServices)
