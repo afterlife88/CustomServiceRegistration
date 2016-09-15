@@ -1,7 +1,9 @@
-﻿using CustomServiceRegistration.Domain.Context;
+﻿using System;
+using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.Domain.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +24,7 @@ namespace CustomServiceRegistration
 
 			services.AddIdentity<ApplicationUser, IdentityRole>()
 			.AddEntityFrameworkStores<DataDbContext>();
-			
+
 			services.AddMvc().AddJsonOptions(options =>
 			{
 				options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -51,23 +53,25 @@ namespace CustomServiceRegistration
 			app.UseWelcomePage();
 		}
 
-		//private static async void CreateSampleData(IServiceProvider applicationServices)
-		//{
-		//	using (var dbContext = applicationServices.GetService<DataDbContext>())
-		//	{
-		//		var sqlServerDatabase = dbContext.Database;
-		//		if (sqlServerDatabase != null)
-		//		{
-		//			// add some users
-		//			var userManager = applicationServices.GetService<UserManager<ApplicationUser>>();
-		//			ApplicationUser user = await userManager.FindByEmailAsync("test01@example.com");
-		//			if (user == null)
-		//			{
-		//				user = new ApplicationUser {UserName = "test01", Email = "test01@example.com"};
-		//				await userManager.CreateAsync(user, "Qwer!@#12345");
-		//			}
-		//		}
-		//	}
-		//}
+		private static async void CreateSampleData(IServiceProvider applicationServices)
+		{
+			using (var dbContext = applicationServices.GetService<DataDbContext>())
+			{
+				var sqlServerDatabase = dbContext.Database;
+				if (sqlServerDatabase != null)
+				{
+					var manager = applicationServices.GetService<UserManager<ApplicationUser>>();
+					await manager.FindByEmailAsync("test01@example.com");
+					// add some users
+					//var userManager = applicationServices.GetService<UserManager<ApplicationUser>>();
+					//ApplicationUser user = await userManager.FindByEmailAsync("test01@example.com");
+					//if (user == null)
+					//{
+					//	user = new ApplicationUser { UserName = "test01", Email = "test01@example.com" };
+					//	await userManager.CreateAsync(user, "Qwer!@#12345");
+					//}
+				}
+			}
+		}
 	}
 }
