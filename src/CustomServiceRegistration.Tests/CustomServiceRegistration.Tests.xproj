@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>f1e41d2e-bdaa-4d1f-bc92-bbd41e55f013</ProjectGuid>
-    <RootNamespace>CustomServiceRegistration.Domain</RootNamespace>
+    <ProjectGuid>f7000c2a-ff33-4bd9-b52a-689457bfcae6</ProjectGuid>
+    <RootNamespace>CustomServiceRegistration.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

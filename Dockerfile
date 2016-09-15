@@ -1,11 +1,20 @@
 FROM microsoft/dotnet:latest
-COPY src/CustomServiceRegistration /app
-WORKDIR /app
- 
+
+# Set env variables
+ENV ASPNETCORE_URLS http://*:5000
+
+COPY /src/CustomServiceRegistration /app/src/CustomServiceRegistration
+COPY /src/CustomServiceRegistration.Domain /app/src/CustomServiceRegistration.Domain
+
+# Restore domain
+WORKDIR /app/src/CustomServiceRegistration.Domain
+RUN ["dotnet", "restore"]
+
+WORKDIR /app/src/CustomServiceRegistration
 RUN ["dotnet", "restore"]
 RUN ["dotnet", "build"]
  
+# Open port
 EXPOSE 5000/tcp
-ENV ASPNETCORE_URLS http://*:5000
  
 ENTRYPOINT ["dotnet", "run"]
