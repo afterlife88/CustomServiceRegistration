@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "dependencies": {
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "platform"
     },
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
@@ -12,7 +12,8 @@
     "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
     "Swashbuckle": "6.0.0-beta902",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
-    "CustomServiceRegistration.Domain": "1.0.0-*"
+    "CustomServiceRegistration.Domain": "1.0.0-*",
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.1"
   },
 
   "tools": {
