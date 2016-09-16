@@ -1,7 +1,6 @@
 ﻿using CustomServiceRegistration.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CustomServiceRegistration.Domain.Context
 {
