@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.Domain.Infrastructure.Configuration;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
@@ -7,6 +8,7 @@ using CustomServiceRegistration.Domain.Models;
 using CustomServiceRegistration.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

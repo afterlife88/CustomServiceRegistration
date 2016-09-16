@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +18,7 @@ namespace CustomServiceRegistration.TokenProvider
     {
         private readonly RequestDelegate _next;
         private readonly TokenProviderOptions _options;
-    
+
         private readonly JsonSerializerSettings _serializerSettings;
 
         public TokenProviderMiddleware(
@@ -29,7 +27,7 @@ namespace CustomServiceRegistration.TokenProvider
             )
         {
             _next = next;
-        
+
 
             _options = options.Value;
             ThrowIfInvalidOptions(_options);
@@ -56,7 +54,7 @@ namespace CustomServiceRegistration.TokenProvider
                 return context.Response.WriteAsync("Bad request.");
             }
 
-    
+
 
             return GenerateToken(context);
         }
@@ -64,13 +62,13 @@ namespace CustomServiceRegistration.TokenProvider
         private async Task GenerateToken(HttpContext context)
         {
             var appname = context.Request.Form["appname"];
-           
+
 
             var identity = await _options.IdentityResolver(appname);
             if (identity == null)
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Invalid username or password.");
+                await context.Response.WriteAsync("Application not exist");
                 return;
             }
 
