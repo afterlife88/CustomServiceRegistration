@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.TokenProvider;
 using CustomServiceRegistration.Utils;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CustomServiceRegistration
@@ -15,8 +19,9 @@ namespace CustomServiceRegistration
         // The secret key every token will be signed with.
         private static readonly string secretKey = "tS6rP8Q5yz78Fdlkscg96Gj5TCI0Vsfl";
 
-        private void ConfigureAuth(IApplicationBuilder app)
+        private void ConfigureAuth(IApplicationBuilder app, IServiceProvider services)
         {
+
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
             app.UseSimpleTokenProvider(new TokenProviderOptions
@@ -26,7 +31,7 @@ namespace CustomServiceRegistration
                 Issuer = "ExampleIssuer",
                 SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
                 IdentityResolver = GetIdentity
-            });
+            }, services);
 
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -69,17 +74,19 @@ namespace CustomServiceRegistration
             });
         }
 
-        private Task<ClaimsIdentity> GetIdentity(string appname, IApplicationBuilder applicationBuilder)
+        private async Task<ClaimsIdentity> GetIdentity(string appname, IServiceProvider serviceProvider)
         {
-            
+            var dataDb = serviceProvider.GetService<DataDbContext>();
+            var checkingName = await dataDb.Applications.FirstOrDefaultAsync(r => r.ApplicationName == appname);
+
             // Don't do this in production, obviously!
-            if (appname == "test")
+            if (checkingName != null)
             {
-                return Task.FromResult(new ClaimsIdentity(new GenericIdentity(appname, "Token"), new Claim[] { }));
+                return await Task.FromResult(new ClaimsIdentity(new GenericIdentity(appname, "Token"), new Claim[] { }));
             }
 
             // Credentials are invalid, or account doesn't exist
-            return Task.FromResult<ClaimsIdentity>(null);
+            return await Task.FromResult<ClaimsIdentity>(null);
         }
     }
 }

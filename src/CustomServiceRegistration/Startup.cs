@@ -80,9 +80,9 @@ namespace CustomServiceRegistration
         }
 
 
-        public void Configure(IApplicationBuilder app, IDatabaseInitializer databaseInitializer)
+        public void Configure(IApplicationBuilder app, IDatabaseInitializer databaseInitializer, IServiceProvider services)
         {
-            ConfigureAuth(app);
+            ConfigureAuth(app, services);
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
             app.UseCors(builder =>

@@ -21,14 +21,14 @@ namespace CustomServiceRegistration.TokenProvider
         private readonly TokenProviderOptions _options;
 
         private readonly JsonSerializerSettings _serializerSettings;
-        private readonly IApplicationBuilder _appBuilder;
+        private readonly IServiceProvider _serviceProvider;
         public TokenProviderMiddleware(
             RequestDelegate next,
             IOptions<TokenProviderOptions> options,
-             IApplicationBuilder appBuilder)
+             IServiceProvider serviceProvider)
         {
             _next = next;
-            _appBuilder = appBuilder;
+            _serviceProvider = serviceProvider;
 
 
             _options = options.Value;
@@ -58,15 +58,15 @@ namespace CustomServiceRegistration.TokenProvider
 
 
 
-            return GenerateToken(context, _appBuilder);
+            return GenerateToken(context, _serviceProvider);
         }
 
-        private async Task GenerateToken(HttpContext context, IApplicationBuilder app)
+        private async Task GenerateToken(HttpContext context, IServiceProvider serviceProvider)
         {
             var appname = context.Request.Form["appname"];
 
 
-            var identity = await _options.IdentityResolver(appname, app);
+            var identity = await _options.IdentityResolver(appname, serviceProvider);
             if (identity == null)
             {
                 context.Response.StatusCode = 400;
