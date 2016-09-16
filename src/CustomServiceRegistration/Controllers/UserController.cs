@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
 using CustomServiceRegistration.Models;
 using CustomServiceRegistration.Services.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomServiceRegistration.Controllers
@@ -25,6 +27,14 @@ namespace CustomServiceRegistration.Controllers
         {
             _userService = new UserService(ModelState, userRepository);
         }
+
+        [HttpGet]
+        [Authorize]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
         /// <summary>
         /// Creates a user in our registration service.
         /// </summary>

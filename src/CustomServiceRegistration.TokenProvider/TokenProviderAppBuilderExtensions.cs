@@ -26,7 +26,7 @@ namespace CustomServiceRegistration.TokenProvider
                 throw new ArgumentNullException(nameof(options));
             }
 
-            return app.UseMiddleware<TokenProviderMiddleware>(Options.Create(options));
+            return app.UseMiddleware<TokenProviderMiddleware>(Options.Create(options), app);
         }
     }
 }

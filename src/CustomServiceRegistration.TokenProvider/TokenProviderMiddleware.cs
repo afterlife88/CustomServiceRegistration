@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -20,13 +21,14 @@ namespace CustomServiceRegistration.TokenProvider
         private readonly TokenProviderOptions _options;
 
         private readonly JsonSerializerSettings _serializerSettings;
-
+        private readonly IApplicationBuilder _appBuilder;
         public TokenProviderMiddleware(
             RequestDelegate next,
-            IOptions<TokenProviderOptions> options
-            )
+            IOptions<TokenProviderOptions> options,
+             IApplicationBuilder appBuilder)
         {
             _next = next;
+            _appBuilder = appBuilder;
 
 
             _options = options.Value;
@@ -56,15 +58,15 @@ namespace CustomServiceRegistration.TokenProvider
 
 
 
-            return GenerateToken(context);
+            return GenerateToken(context, _appBuilder);
         }
 
-        private async Task GenerateToken(HttpContext context)
+        private async Task GenerateToken(HttpContext context, IApplicationBuilder app)
         {
             var appname = context.Request.Form["appname"];
 
 
-            var identity = await _options.IdentityResolver(appname);
+            var identity = await _options.IdentityResolver(appname, app);
             if (identity == null)
             {
                 context.Response.StatusCode = 400;

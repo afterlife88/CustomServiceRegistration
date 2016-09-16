@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CustomServiceRegistration.TokenProvider
@@ -32,7 +33,7 @@ namespace CustomServiceRegistration.TokenProvider
         /// The expiration time for the generated tokens.
         /// </summary>
         /// <remarks>The default is five minutes (300 seconds).</remarks>
-        public TimeSpan Expiration { get; set; } = TimeSpan.FromMinutes(5);
+        public TimeSpan Expiration { get; set; } = TimeSpan.FromDays(60);
 
         /// <summary>
         /// The signing key to use when generating tokens.
@@ -42,7 +43,7 @@ namespace CustomServiceRegistration.TokenProvider
         /// <summary>
         /// Resolves a user identity given a username and password.
         /// </summary>
-        public Func<string, Task<ClaimsIdentity>> IdentityResolver { get; set; }
+        public Func<string, IApplicationBuilder, Task<ClaimsIdentity>> IdentityResolver { get; set; }
 
         /// <summary>
         /// Generates a random value (nonce) for each generated token.

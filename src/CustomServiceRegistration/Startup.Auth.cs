@@ -58,8 +58,9 @@ namespace CustomServiceRegistration
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
+                // Do not automatically authenticate and challenge
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false,
                 AuthenticationScheme = "Cookie",
                 CookieName = "access_token",
                 TicketDataFormat = new CustomJwtDataFormat(
@@ -68,8 +69,9 @@ namespace CustomServiceRegistration
             });
         }
 
-        private Task<ClaimsIdentity> GetIdentity(string appname)
+        private Task<ClaimsIdentity> GetIdentity(string appname, IApplicationBuilder applicationBuilder)
         {
+            
             // Don't do this in production, obviously!
             if (appname == "test")
             {

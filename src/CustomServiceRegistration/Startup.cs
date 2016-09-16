@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.Domain.Infrastructure.Configuration;
@@ -49,7 +50,7 @@ namespace CustomServiceRegistration
               {
                   options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
               });
-
+          
             //Adding swagger generation with default settings
             services.AddSwaggerGen(options =>
             {
@@ -60,12 +61,16 @@ namespace CustomServiceRegistration
                     Description = "API documentation",
                     TermsOfService = "None"
                 });
+
+                //options.OperationFilter<AssignSecurityRequirements>();
+
             });
             if (_hostingEnv.IsDevelopment())
             {
                 services.ConfigureSwaggerGen(c =>
                 {
                     c.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
+                    
                 });
             }
             // for seeding the database with the demo user details
@@ -87,6 +92,7 @@ namespace CustomServiceRegistration
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowAnyOrigin());
+
             // Add MVC to the request pipeline.
             app.UseDeveloperExceptionPage();
             app.UseMvc();
