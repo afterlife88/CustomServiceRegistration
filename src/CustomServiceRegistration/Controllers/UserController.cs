@@ -52,8 +52,7 @@ namespace CustomServiceRegistration.Controllers
                 {
                     return StatusCode(201);
                 }
-
-                return BadRequest(ModelState);
+                return BadRequest(_userService.ModelState);
             }
             catch (Exception ex)
             {
