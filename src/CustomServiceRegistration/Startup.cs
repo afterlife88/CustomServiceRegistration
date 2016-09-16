@@ -16,7 +16,7 @@ using Swashbuckle.Swagger.Model;
 
 namespace CustomServiceRegistration
 {
-    public class Startup
+    public partial class Startup
     {
         private readonly IHostingEnvironment _hostingEnv;
 
@@ -75,9 +75,16 @@ namespace CustomServiceRegistration
 
         public void Configure(IApplicationBuilder app, IDatabaseInitializer databaseInitializer)
         {
+            ConfigureAuth(app);
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
-
+            app.UseCors(builder =>
+                    // This will allow any request from any server. Tweak to fit your needs!
+                    // The fluent API is pretty pleasant to work with.
+                    builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin());
             // Add MVC to the request pipeline.
             app.UseDeveloperExceptionPage();
             app.UseMvc();

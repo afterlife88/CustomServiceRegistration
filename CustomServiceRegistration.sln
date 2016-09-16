@@ -16,6 +16,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CustomServiceRegistration.T
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CustomServiceRegistration.Domain", "src\CustomServiceRegistration.Domain\CustomServiceRegistration.Domain.xproj", "{F1E41D2E-BDAA-4D1F-BC92-BBD41E55F013}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CustomServiceRegistration.TokenProvider", "src\CustomServiceRegistration.TokenProvider\CustomServiceRegistration.TokenProvider.xproj", "{537FFE5B-BC7D-4F42-98C3-EB58D87DF913}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{F1E41D2E-BDAA-4D1F-BC92-BBD41E55F013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1E41D2E-BDAA-4D1F-BC92-BBD41E55F013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1E41D2E-BDAA-4D1F-BC92-BBD41E55F013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{537FFE5B-BC7D-4F42-98C3-EB58D87DF913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{537FFE5B-BC7D-4F42-98C3-EB58D87DF913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{537FFE5B-BC7D-4F42-98C3-EB58D87DF913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{537FFE5B-BC7D-4F42-98C3-EB58D87DF913}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 		{FCD1637F-3577-4A8B-8550-BA8DD8868797} = {E2661515-27D5-4485-8712-622165020492}
 		{F7000C2A-FF33-4BD9-B52A-689457BFCAE6} = {E2661515-27D5-4485-8712-622165020492}
 		{F1E41D2E-BDAA-4D1F-BC92-BBD41E55F013} = {E2661515-27D5-4485-8712-622165020492}
+		{537FFE5B-BC7D-4F42-98C3-EB58D87DF913} = {E2661515-27D5-4485-8712-622165020492}
 	EndGlobalSection
 EndGlobal

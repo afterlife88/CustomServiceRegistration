@@ -8,9 +8,10 @@ using CustomServiceRegistration.Domain.Context;
 namespace CustomServiceRegistration.Domain.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160916221952_ApplicationTable")]
+    partial class ApplicationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
