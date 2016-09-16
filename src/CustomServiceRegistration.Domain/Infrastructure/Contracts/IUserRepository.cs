@@ -7,7 +7,7 @@ using CustomServiceRegistration.Domain.Models;
 
 namespace CustomServiceRegistration.Domain.Infrastructure.Contracts
 {
-	public interface IUserRepository : IDisposable
+	public interface IUserRepository
 	{
 		Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
 		Task CreateAsync(ApplicationUser user, string password);

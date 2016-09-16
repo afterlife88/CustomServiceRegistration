@@ -35,16 +35,5 @@ namespace CustomServiceRegistration.Domain.Infrastructure.Repositories
 		{
 			return await _userManager.FindByNameAsync(username);
 		}
-
-		private bool _disposed;
-		public void Dispose()
-		{
-			if (!_disposed)
-			{
-				_userManager.Dispose();
-			
-			}
-			_disposed = true;
-		}
 	}
 }
