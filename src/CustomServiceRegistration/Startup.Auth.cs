@@ -79,7 +79,6 @@ namespace CustomServiceRegistration
             var dataDb = serviceProvider.GetService<DataDbContext>();
             var checkingName = await dataDb.Applications.FirstOrDefaultAsync(r => r.ApplicationName == appname);
 
-            // Don't do this in production, obviously!
             if (checkingName != null)
             {
                 return await Task.FromResult(new ClaimsIdentity(new GenericIdentity(appname, "Token"), new Claim[] { }));
