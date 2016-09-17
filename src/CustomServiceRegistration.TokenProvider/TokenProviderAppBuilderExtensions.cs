@@ -9,7 +9,7 @@ namespace CustomServiceRegistration.TokenProvider
     /// </summary>
     public static class TokenProviderAppBuilderExtensions
     {
-        /// <summary>
+        /// <summary/>
         /// Adds the <see cref="TokenProviderMiddleware"/> middleware to the specified <see cref="IApplicationBuilder"/>, which enables token generation capabilities.
         /// <param name="app">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
         /// <param name="options">A  <see cref="TokenProviderOptions"/> that specifies options for the middleware.</param>

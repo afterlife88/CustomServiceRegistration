@@ -11,7 +11,5 @@ namespace CustomServiceRegistration.Domain.Infrastructure.Contracts
         Task<ApplicationUser> GetUserByNameAsync(string username);
         Task EditAsync(ApplicationUser user);
         Task<ApplicationUser> GetUser(string userEmail);
-
-
     }
 }

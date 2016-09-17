@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.Domain.Infrastructure.Configuration;
@@ -9,7 +8,6 @@ using CustomServiceRegistration.Domain.Models;
 using CustomServiceRegistration.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,12 +19,12 @@ namespace CustomServiceRegistration
 {
     public partial class Startup
     {
-        private readonly IHostingEnvironment _hostingEnv;
+        //private readonly IHostingEnvironment _hostingEnv;
 
-        public Startup(IHostingEnvironment hostingEnv)
-        {
-            _hostingEnv = hostingEnv;
-        }
+        //public Startup(IHostingEnvironment hostingEnv)
+        //{
+        //    _hostingEnv = hostingEnv;
+        //}
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -50,7 +48,7 @@ namespace CustomServiceRegistration
               {
                   options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
               });
-          
+
             //Adding swagger generation with default settings
             services.AddSwaggerGen(options =>
             {
@@ -70,13 +68,15 @@ namespace CustomServiceRegistration
             //    services.ConfigureSwaggerGen(c =>
             //    {
             //        c.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
-                    
+
             //    });
             //}
             // for seeding the database with the demo user details
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
         }
 
 
