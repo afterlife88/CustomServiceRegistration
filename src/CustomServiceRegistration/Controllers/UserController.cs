@@ -6,8 +6,6 @@ using System.Web.Http;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
 using CustomServiceRegistration.Models;
 using CustomServiceRegistration.Services.Users;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomServiceRegistration.Controllers
