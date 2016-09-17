@@ -109,17 +109,24 @@ namespace CustomServiceRegistration.Controllers
         /// Updating user data
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <response code="204">Return if updated successfully</response>
+        /// <response code="400">Returns if passed value invalid</response>
+        /// <response code="401">Returns if authorize token are missing in header or token is wrong</response>
+        /// <response code="500">Returns if server error has occurred</response>
         [HttpPut]
         [Route("update")]
         [ProducesResponseType(typeof(NoContentResult), 204)]
+        [ProducesResponseType(typeof(UnauthorizedResult), 401)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         [ProducesResponseType(typeof(InternalServerErrorResult), 500)]
         public async Task<IActionResult> Update([FromBody] UserModel model)
         {
             try
             {
-                var userName = User.Claims;
+                var checkIfRequestFromUserToken = User.Claims.FirstOrDefault(r => r.Value == "user");
+                if (checkIfRequestFromUserToken == null)
+                    return Unauthorized();
+
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
