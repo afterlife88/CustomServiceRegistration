@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace CustomServiceRegistration.Configurations
 {

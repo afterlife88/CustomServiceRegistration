@@ -10,6 +10,12 @@
         controller: 'RegisterAppController',
         controllerAs: 'vm'
       })
+      .when('/register-user',
+      {
+        templateUrl: './app/components/register-user/_register-user.html',
+        controller: 'RegisterUserController',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: "/home"
       });
