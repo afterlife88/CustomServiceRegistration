@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -6,6 +7,7 @@ using CustomServiceRegistration.Domain.Infrastructure.Contracts;
 using CustomServiceRegistration.Models;
 using CustomServiceRegistration.Services.Users;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomServiceRegistration.Controllers
@@ -33,11 +35,10 @@ namespace CustomServiceRegistration.Controllers
         /// <param name="userEmail"></param>
         /// <response code="200">Return user data</response>
         /// <response code="400">Returns if passed value invalid</response>
-        /// <response code="401">Returns if authorize token are missing in header</response>
+        /// <response code="401">Returns if authorize token are missing in header or token is wrong</response>
         /// <response code="404">Returns if passed user are not exist</response>
         /// <response code="500">Returns if server error has occurred</response>
         [HttpGet("{userEmail}")]
-        [Authorize]
         [ProducesResponseType(typeof(UserModel), 200)]
         [ProducesResponseType(typeof(UnauthorizedResult), 401)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -47,6 +48,11 @@ namespace CustomServiceRegistration.Controllers
         {
             try
             {
+
+                var checkIfRequestFromApp = User.Claims.FirstOrDefault(r => r.Value == "app");
+                if (checkIfRequestFromApp == null)
+                    return Unauthorized();
+
                 if (string.IsNullOrEmpty(userEmail))
                 {
                     return BadRequest();
@@ -113,6 +119,7 @@ namespace CustomServiceRegistration.Controllers
         {
             try
             {
+                var userName = User.Claims;
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);

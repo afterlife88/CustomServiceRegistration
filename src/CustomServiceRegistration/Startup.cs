@@ -19,13 +19,6 @@ namespace CustomServiceRegistration
 {
     public partial class Startup
     {
-        //private readonly IHostingEnvironment _hostingEnv;
-
-        //public Startup(IHostingEnvironment hostingEnv)
-        //{
-        //    _hostingEnv = hostingEnv;
-        //}
-
         public void ConfigureServices(IServiceCollection services)
         {
             var connection =
@@ -60,17 +53,10 @@ namespace CustomServiceRegistration
                     TermsOfService = "None"
                 });
                 options.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
-                //options.OperationFilter<AssignSecurityRequirements>();
+             
 
             });
-            //if (_hostingEnv.IsDevelopment())
-            //{
-            //    services.ConfigureSwaggerGen(c =>
-            //    {
-            //        c.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
-
-            //    });
-            //}
+        
             // for seeding the database with the demo user details
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
 

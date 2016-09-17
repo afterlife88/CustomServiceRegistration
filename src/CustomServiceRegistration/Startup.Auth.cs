@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using CustomServiceRegistration.Domain.Context;
+using CustomServiceRegistration.Domain.Models;
 using CustomServiceRegistration.TokenProvider;
 using CustomServiceRegistration.Utils;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -73,16 +76,39 @@ namespace CustomServiceRegistration
             });
         }
 
-        private async Task<ClaimsIdentity> GetIdentity(string appname, IServiceProvider serviceProvider)
+        private async Task<ClaimsIdentity> GetIdentity(Dictionary<string, string> names, IServiceProvider serviceProvider)
         {
-            var dataDb = serviceProvider.GetService<DataDbContext>();
-            var checkingName = await dataDb.Applications.FirstOrDefaultAsync(r => r.ApplicationName == appname);
-
-            if (checkingName != null)
+            if (names["appname"] != null)
             {
-                return await Task.FromResult(new ClaimsIdentity(new GenericIdentity(appname, "Token"), new Claim[] { }));
-            }
+                var appname = names["appname"];
+                var dataDb = serviceProvider.GetService<DataDbContext>();
+                var checkingName = await dataDb.Applications.FirstOrDefaultAsync(r => r.ApplicationName == appname);
 
+                if (checkingName != null)
+                {
+                    return
+                        await Task.FromResult(new ClaimsIdentity(new GenericIdentity(appname, "Token"), new[]
+                        {
+                            new Claim("app", "app")
+                        }));
+                }
+            }
+            else
+            {
+                var login = names["login"];
+                var password = names["password"];
+
+                var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+                var user = await userManager.FindByNameAsync(login);
+                if (user != null && await userManager.CheckPasswordAsync(user, password))
+                {
+                    return
+                        await Task.FromResult(new ClaimsIdentity(new GenericIdentity(login, "Token"), new[]
+                        {
+                            new Claim("user", "user")
+                        }));
+                }
+            }
             // Credentials are invalid, or account doesn't exist
             return await Task.FromResult<ClaimsIdentity>(null);
         }

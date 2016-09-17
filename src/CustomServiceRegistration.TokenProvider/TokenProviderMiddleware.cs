@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -63,29 +64,50 @@ namespace CustomServiceRegistration.TokenProvider
         private async Task GenerateToken(HttpContext context, IServiceProvider serviceProvider)
         {
             var appname = context.Request.Form["appname"];
+            var login = context.Request.Form["login"];
+            var password = context.Request.Form["password"];
 
+            var dictionary = new Dictionary<string, string>()
+            {
+                {"appname", appname},
+                {"login", login},
+                {"password", password}
+            };
 
-            var identity = await _options.IdentityResolver(appname, serviceProvider);
+            var identity = await _options.IdentityResolver(dictionary, serviceProvider);
             if (identity == null)
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Application not exist");
+                //await context.Response.WriteAsync("Application not exist");
                 return;
             }
 
             var now = DateTime.UtcNow;
+            string claimValue;
+            string userOrApp;
+            if (dictionary["appname"] != null)
+            {
+                claimValue = appname;
+                userOrApp = "app";
+            }
+            else
+            {
+                claimValue = dictionary["login"];
+                userOrApp = "user";
+            }
 
             // Specifically add the jti (nonce), iat (issued timestamp), and sub (subject/user) claims.
             // You can add other claims here, if you want:
             var claims = new Claim[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, appname),
-                new Claim(JwtRegisteredClaimNames.Jti, await _options.NonceGenerator()),
-                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64)
-            };
+                    new Claim(JwtRegisteredClaimNames.Sub, claimValue),
+                    new Claim(JwtRegisteredClaimNames.Jti, await _options.NonceGenerator()),
+                    new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64),
+                    new Claim(JwtRegisteredClaimNames.Typ, userOrApp),
+            }; 
 
-            // Create the JWT and write it to a string
-            var jwt = new JwtSecurityToken(
+             // Create the JWT and write it to a string
+             var jwt = new JwtSecurityToken(
                 issuer: _options.Issuer,
                 audience: _options.Audience,
                 claims: claims,
