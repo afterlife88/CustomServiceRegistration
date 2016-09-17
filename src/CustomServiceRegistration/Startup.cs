@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using CustomServiceRegistration.Configurations;
 using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.Domain.Infrastructure.Configuration;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
@@ -7,8 +8,8 @@ using CustomServiceRegistration.Domain.Infrastructure.Repositories;
 using CustomServiceRegistration.Domain.Models;
 using CustomServiceRegistration.Services.Users;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -53,13 +54,17 @@ namespace CustomServiceRegistration
                     TermsOfService = "None"
                 });
                 options.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
-             
+
 
             });
-        
+            //services.ReplaceDefaultViewEngine();
             // for seeding the database with the demo user details
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
-
+            // Set angular locations
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(new AngularAppViewLocationExpander());
+            });
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
@@ -72,8 +77,7 @@ namespace CustomServiceRegistration
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
             app.UseCors(builder =>
-                    // This will allow any request from any server. Tweak to fit your needs!
-                    // The fluent API is pretty pleasant to work with.
+                    // This will allow any request from any server. 
                     builder
                     .AllowAnyHeader()
                     .AllowAnyMethod()
@@ -89,7 +93,7 @@ namespace CustomServiceRegistration
             });
 
             app.UseSwaggerUi();
-
+            app.UseMvcWithDefaultRoute();
 
             databaseInitializer.Seed().GetAwaiter().GetResult();
         }
