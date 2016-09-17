@@ -3,15 +3,27 @@
 
   angular.module('app').controller('RegisterAppController', RegisterAppController);
 
-  RegisterAppController.$inject = ['$mdSidenav'];
+  RegisterAppController.$inject = ['ApplicationService', 'AuthTokenService'];
 
-  function RegisterAppController($mdSidenav) {
+  function RegisterAppController(ApplicationService, AuthTokenService) {
 
     var vm = this;
-    vm.showHints = true;
+    vm.applicationData = {};
+    vm.tokenRecived = false;
+    vm.submitRegistration = submitRegistration;
 
-    function toggleList() {
-      $mdSidenav('left').toggle();
+    function submitRegistration(data) {
+      return ApplicationService.create(data).then(function () {
+        AuthTokenService.applicationToken(data)
+          .then(function (result) {
+            console.log(result);
+            vm.tokenRecived = true;
+            vm.applicationData.Token = 'Bearer ' + result.access_token;
+          });
+      }).catch(function (err) {
+        console.log(err);
+        vm.errorMsg = err;
+      });
     }
   }
 })(angular);

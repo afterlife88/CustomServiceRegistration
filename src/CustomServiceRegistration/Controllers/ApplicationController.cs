@@ -15,6 +15,7 @@ namespace CustomServiceRegistration.Controllers
         {
             _applicationRepository = applicationRepository;
         }
+        [Route("create")]
         [HttpPost]
         public async Task<IActionResult> AddApplication([FromBody] ApplicationModel model)
         {

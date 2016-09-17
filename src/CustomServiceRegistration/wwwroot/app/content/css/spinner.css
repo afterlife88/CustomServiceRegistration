@@ -1,0 +1,18 @@
+﻿/* Styles go here */
+
+#plz_wait md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle, md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+    border-top-color: white;
+}
+#plz_wait md-progress-circular.md-default-theme .md-inner .md-gap, md-progress-circular .md-inner .md-gap {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+#plz_wait md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle {
+    border-left-color: white;
+}
+#plz_wait md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle {
+    border-left-color: white;
+}
+#plz_wait md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+    border-right-color: white;
+}

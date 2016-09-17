@@ -32,11 +32,6 @@ md-list .md-button {
         color: #03a9f4;
     }
 
-/*.menu-button {
-    position: relative;
-    width: 128px;
-    height: 128px;
-    margin: 0px;
-    vertical-align: middle;
-    
-}*/
+md-dialog {
+    overflow: visible;
+}
