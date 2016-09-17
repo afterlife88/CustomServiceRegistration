@@ -64,6 +64,27 @@ namespace CustomServiceRegistration.Services.Users
             await _userRepository.EditAsync(existedUser);
             return true;
         }
+
+        public async Task<UserModel> GetUser(string userEmail)
+        {
+            var user = await _userRepository.GetUser(userEmail);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userModel = new UserModel()
+            {
+                SecondName = user.SecondName,
+                CountryName = user.CountryName,
+                Age = user.Age,
+                FirstName = user.FirstName,
+                UserName = user.UserName,
+                Email = user.Email
+            };
+            return userModel;
+        }
     }
 
 }

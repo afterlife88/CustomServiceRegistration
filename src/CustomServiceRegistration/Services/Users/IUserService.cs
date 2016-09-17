@@ -9,5 +9,6 @@ namespace CustomServiceRegistration.Services.Users
         Task<bool> CreateAsync(RegistrationModel model);
         ModelStateDictionary ModelState { get; }
         Task<bool> EditUserAsync(UserModel model);
+        Task<UserModel> GetUser(string userEmail);
     }
 }

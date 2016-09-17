@@ -61,18 +61,18 @@ namespace CustomServiceRegistration
                     Description = "API documentation",
                     TermsOfService = "None"
                 });
-
+                options.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
                 //options.OperationFilter<AssignSecurityRequirements>();
 
             });
-            if (_hostingEnv.IsDevelopment())
-            {
-                services.ConfigureSwaggerGen(c =>
-                {
-                    c.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
+            //if (_hostingEnv.IsDevelopment())
+            //{
+            //    services.ConfigureSwaggerGen(c =>
+            //    {
+            //        c.IncludeXmlComments(GetXmlCommentsPath(PlatformServices.Default.Application));
                     
-                });
-            }
+            //    });
+            //}
             // for seeding the database with the demo user details
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
             services.AddScoped<IUserRepository, UserRepository>();

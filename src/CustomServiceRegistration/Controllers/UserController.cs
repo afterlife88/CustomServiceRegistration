@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
@@ -27,14 +27,45 @@ namespace CustomServiceRegistration.Controllers
         {
             _userService = new UserService(ModelState, userRepository);
         }
-
-        [HttpGet]
+        /// <summary>
+        /// Return user data
+        /// </summary>
+        /// <param name="userEmail"></param>
+        /// <response code="200">Return user data</response>
+        /// <response code="400">Returns if passed value invalid</response>
+        /// <response code="401">Returns if authorize token are missing in header</response>
+        /// <response code="404">Returns if passed user are not exist</response>
+        /// <response code="500">Returns if server error has occurred</response>
+        [HttpGet("{userEmail}")]
         [Authorize]
-        public IEnumerable<string> Get()
+        [ProducesResponseType(typeof(UserModel), 200)]
+        [ProducesResponseType(typeof(UnauthorizedResult), 401)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        [ProducesResponseType(typeof(NotFoundResult), 404)]
+        [ProducesResponseType(typeof(InternalServerErrorResult), 500)]
+        public async Task<IActionResult> GetUser(string userEmail)
         {
-            return new string[] { "value1", "value2" };
-        }
+            try
+            {
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return BadRequest();
+                }
+                var validEmail = WebUtility.HtmlEncode(userEmail);
 
+                var user = await _userService.GetUser(validEmail);
+
+                if (user != null)
+                {
+                    return new ObjectResult(user);
+                }
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         /// <summary>
         /// Creates a user in registration service.
         /// </summary>
@@ -73,8 +104,8 @@ namespace CustomServiceRegistration.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpPut]
+        [Route("update")]
         [ProducesResponseType(typeof(NoContentResult), 204)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         [ProducesResponseType(typeof(InternalServerErrorResult), 500)]
