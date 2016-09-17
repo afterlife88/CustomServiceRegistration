@@ -45,7 +45,25 @@ namespace CustomServiceRegistration.Services.Users
 
             return true;
         }
+        public async Task<bool> EditUserAsync(UserModel model)
+        {
+            var existedUser = await _userRepository.GetUserByNameAsync(model.UserName);
+            if (existedUser == null)
+            {
+                ModelState.AddModelError(string.Empty, "The user not exist...");
+                return false;
+            }
+            // Updating data
+            existedUser.FirstName = model.FirstName;
+            existedUser.SecondName = model.SecondName;
+            existedUser.Email = model.Email;
+            existedUser.UserName = model.UserName;
+            existedUser.Age = model.Age;
+            existedUser.CountryName = model.CountryName;
 
-
+            await _userRepository.EditAsync(existedUser);
+            return true;
+        }
     }
+
 }

@@ -9,6 +9,8 @@ namespace CustomServiceRegistration.Domain.Infrastructure.Contracts
 		Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
 		Task CreateAsync(ApplicationUser user, string password);
 		Task<ApplicationUser> GetUserByNameAsync(string username);
-	
+	    Task EditAsync(ApplicationUser user);
+
+
 	}
 }

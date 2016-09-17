@@ -36,7 +36,7 @@ namespace CustomServiceRegistration.Controllers
         }
 
         /// <summary>
-        /// Creates a user in our registration service.
+        /// Creates a user in registration service.
         /// </summary>
         /// <param name="model"></param>
         /// <response code="200">Returns if user created successfully</response>
@@ -60,6 +60,37 @@ namespace CustomServiceRegistration.Controllers
                 if (completed)
                 {
                     return StatusCode(201);
+                }
+                return BadRequest(_userService.ModelState);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        /// <summary>
+        /// Updating user data
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [ProducesResponseType(typeof(NoContentResult), 204)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        [ProducesResponseType(typeof(InternalServerErrorResult), 500)]
+        public async Task<IActionResult> Update([FromBody] UserModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var completed = await _userService.EditUserAsync(model);
+
+                if (completed)
+                {
+                    return new NoContentResult();
                 }
                 return BadRequest(_userService.ModelState);
             }
