@@ -1,0 +1,42 @@
+﻿html, body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+md-toolbar h3 {
+    margin: auto;
+}
+
+md-list-item > button {
+    width: 100%;
+    text-align: left !important;
+}
+
+#content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+}
+
+md-list .md-button {
+    color: inherit;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}
+
+    md-list .md-button.selected {
+        color: #03a9f4;
+    }
+
+/*.menu-button {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    margin: 0px;
+    vertical-align: middle;
+    
+}*/

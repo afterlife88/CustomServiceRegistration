@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en-us" data-ng-app="app">
+<head>
+  <meta charset="utf-8" />
+  <title>Custom registration service</title>
+  <link href="../lib/angular-material/angular-material.css" rel="stylesheet" />
+  <link href="../app/content/app.css" rel="stylesheet" />
+</head>
+
+<body layout="column">
+
+  <md-toolbar layout="row" data-ng-controller="HomeController as vm">
+    <md-button class="menu" data-ng-click="vm.toggleList()" hide-gt-sm aria-label="Show menu">
+      <md-icon md-svg-src="../app/content/svg/ic_menu_white_24px.svg"></md-icon>
+    </md-button>
+    <h3>Custom service registration</h3>
+  </md-toolbar>
+
+  <div class="container" layout="row" flex data-ng-controller="HomeController as vm">
+    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id='left' class="md-whiteframe-4dp">
+      <md-list data-ng-click="vm.toggleList()">
+        <md-list-item class="menu-button">
+          <md-button href="/#/register-app">
+            <md-icon md-svg-src="../app/content/svg/ic_input_black_24px.svg"></md-icon>
+            Register application in service
+          </md-button>
+        </md-list-item>
+        <md-list-item class="menu-button">
+          <md-button href="/#/">
+            <md-icon md-svg-src="../app/content/svg/ic_person_black_24px.svg"></md-icon>
+            Register user in service
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+    <md-content id="content" flex data-ng-view="">
+
+    </md-content>
+  </div>
+
+  <!--<main data-ng-view=""></main>-->
+  <!-- Angular vendors -->
+  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../lib/angular-route/angular-route.min.js"></script>
+
+  <script src="../lib/angular-animate/angular-animate.min.js"></script>
+  <script src="../lib/angular-aria/angular-aria.min.js"></script>
+  <script src="../lib/angular-material/angular-material.min.js"></script>
+
+  <!--<script src="../lib/angular-aria/angular-aria.js"></script>
+  <script src="../lib/angular-material/angular-material.js"></script>-->
+  <!--<script src="../lib/angular/angular.js"></script>-->
+  <!--<script src="../lib/angular-route/angular-route.js"></script>-->
+  <!--<script src="../lib/angular-animate/angular-animate.js"></script>-->
+  <!-- Angular app -->
+  <script src="/app/app.js"></script>
+  <script src="/app/app.config.js"></script>
+  <script src="/app/app.routes.js"></script>
+
+  <script src="/app/components/home/home.controller.js"></script>
+  <script src="/app/components/register-app/register-app.controller.js"></script>
+
+</body>
+</html>

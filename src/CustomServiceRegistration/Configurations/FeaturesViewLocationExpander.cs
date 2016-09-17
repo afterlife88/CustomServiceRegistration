@@ -23,7 +23,8 @@ namespace CustomServiceRegistration.Configurations
             {
                 "~/wwwroot/app/components/{1}/{0}.html",
                 "~/wwwroot/app/{1}/{0}.html",
-                "~/wwwroot/app/{0}.html"
+                "~/wwwroot/app/{0}.html",
+                "~/wwwroot/{0}.html"
             };
             return viewLocationFormats;
         }
