@@ -8,6 +8,7 @@
   function RegisterAppController(ApplicationService, AuthTokenService) {
 
     var vm = this;
+    vm.errorMsg = '';
     vm.applicationData = {};
     vm.tokenRecived = false;
     vm.submitRegistration = submitRegistration;
@@ -16,7 +17,6 @@
       return ApplicationService.create(data).then(function () {
         AuthTokenService.applicationToken(data)
           .then(function (result) {
-            console.log(result);
             vm.tokenRecived = true;
             vm.applicationData.Token = 'Bearer ' + result.access_token;
           });

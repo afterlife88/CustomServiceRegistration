@@ -21,6 +21,12 @@
     <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id='left' class="md-whiteframe-4dp">
       <md-list data-ng-click="vm.toggleList()">
         <md-list-item class="menu-button">
+          <md-button href="/#/Home">
+            <md-icon md-svg-src="../app/content/svg/ic_store_black_24px.svg"></md-icon>
+            Home
+          </md-button>
+        </md-list-item>
+        <md-list-item class="menu-button">
           <md-button href="/#/register-app">
             <md-icon md-svg-src="../app/content/svg/ic_input_black_24px.svg"></md-icon>
             Register application in service
@@ -30,6 +36,12 @@
           <md-button href="/#/">
             <md-icon md-svg-src="../app/content/svg/ic_person_black_24px.svg"></md-icon>
             Register user in service
+          </md-button>
+        </md-list-item>
+        <md-list-item class="menu-button">
+          <md-button href="/swagger/ui">
+            <md-icon md-svg-src="../app/content/svg/ic_info_black_24px.svg"></md-icon>
+            API Documentation
           </md-button>
         </md-list-item>
       </md-list>
