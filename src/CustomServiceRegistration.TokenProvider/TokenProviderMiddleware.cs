@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CustomServiceRegistration.Domain.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
@@ -82,6 +85,8 @@ namespace CustomServiceRegistration.TokenProvider
                 return;
             }
 
+
+
             var now = DateTime.UtcNow;
             string claimValue;
             string userOrApp;
@@ -104,27 +109,44 @@ namespace CustomServiceRegistration.TokenProvider
                     new Claim(JwtRegisteredClaimNames.Jti, await _options.NonceGenerator()),
                     new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64),
                     new Claim(JwtRegisteredClaimNames.Typ, userOrApp),
-            }; 
-
-             // Create the JWT and write it to a string
-             var jwt = new JwtSecurityToken(
-                issuer: _options.Issuer,
-                audience: _options.Audience,
-                claims: claims,
-                notBefore: now,
-                expires: now.Add(_options.Expiration),
-                signingCredentials: _options.SigningCredentials);
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-            var response = new
-            {
-                access_token = encodedJwt,
-                expires_in = (int)_options.Expiration.TotalSeconds
             };
 
-            // Serialize and return the response
-            context.Response.ContentType = "application/json";
-            await context.Response.WriteAsync(JsonConvert.SerializeObject(response, _serializerSettings));
+            // Create the JWT and write it to a string
+            var jwt = new JwtSecurityToken(
+               issuer: _options.Issuer,
+               audience: _options.Audience,
+               claims: claims,
+               notBefore: now,
+               expires: now.Add(_options.Expiration),
+               signingCredentials: _options.SigningCredentials);
+
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+            if (dictionary["appname"] != null)
+            {
+                var responseApp = new
+                {
+                    access_token = encodedJwt,
+                    expires_in = (int)_options.Expiration.TotalSeconds
+                };
+                // Serialize and return the response
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(responseApp, _serializerSettings));
+            }
+            else
+            {
+                var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+                var user = await userManager.FindByNameAsync(login);
+                var responseUser = new
+                {
+                    access_token = encodedJwt,
+                    expires_in = (int)_options.Expiration.TotalSeconds,
+                    userId = user.Id
+                };
+                // Serialize and return the response
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(responseUser, _serializerSettings));
+
+            }
         }
 
         private static void ThrowIfInvalidOptions(TokenProviderOptions options)
