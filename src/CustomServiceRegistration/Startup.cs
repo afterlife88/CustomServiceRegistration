@@ -6,6 +6,7 @@ using CustomServiceRegistration.Domain.Infrastructure.Configuration;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
 using CustomServiceRegistration.Domain.Infrastructure.Repositories;
 using CustomServiceRegistration.Domain.Models;
+using CustomServiceRegistration.Services.Applications;
 using CustomServiceRegistration.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -68,6 +69,7 @@ namespace CustomServiceRegistration
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IApplicationService, ApplicationService>();
         }
 
 

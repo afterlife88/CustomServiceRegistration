@@ -38,6 +38,11 @@
       <input type="password" name="repeated-pass" required data-ng-model="vm.registrationForm.ConfirmPassword">
     </md-input-container>
   </div>
+  <div layout-gt-sm="row">
+    <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
+      {{vm.errorMsg}}
+    </div>
+  </div>
   <div layout-gt-xs="row">
     <md-input-container>
       <md-button type="submit" class="md-raised md-primary">Registrate</md-button>
@@ -45,6 +50,3 @@
   </div>
 </form>
 
-<div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
-  {{vm.errorMsg}}
-</div>

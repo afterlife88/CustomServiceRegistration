@@ -32,12 +32,14 @@
       and second to recive token on <b>/api/token/</b> with with Content-Type': 'application/x-www-form-urlencoded'
       where contains app name to recive token.
   </md-content>
+  <div layout-gt-sm="row">
+    <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
+      {{vm.errorMsg}}
+    </div>
+  </div>
   <div layout-gt-xs="row">
     <md-input-container>
       <md-button type="submit" class="md-raised md-primary">Registrate app and recive token</md-button>
     </md-input-container>
   </div>
 </form>
-<div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
-  {{vm.errorMsg}}
-</div>

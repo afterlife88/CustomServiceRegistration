@@ -15,7 +15,7 @@
     <md-button class="menu" data-ng-click="vm.toggleList()" hide-gt-sm aria-label="Show menu">
       <md-icon md-svg-src="../app/content/svg/ic_menu_white_24px.svg"></md-icon>
     </md-button>
-    <h2 style="padding-left: 10px;">Custom service registration</h2>
+    <h2 style="padding-left: 10px;"><a href="/#/home">Custom service registration</a></h2>
   </md-toolbar>
 
   <div class="container" layout="row" flex data-ng-controller="HomeController as vm">
@@ -31,6 +31,12 @@
           <md-button href="/#/register-app">
             <md-icon md-svg-src="../app/content/svg/ic_input_black_24px.svg"></md-icon>
             Register application in service
+          </md-button>
+        </md-list-item>
+        <md-list-item class="menu-button">
+          <md-button href="/#/token-app">
+            <md-icon md-svg-src="../app/content/svg/ic_lock_open_black_24px.svg"></md-icon>
+            Get token for existing app
           </md-button>
         </md-list-item>
         <md-list-item class="menu-button">
@@ -75,6 +81,8 @@
   <script src="/app/components/register-user/register-user.controller.js"></script>
   <script src="/app/dialogs-controllers/wait.dialog.controller.js"></script>
   <script src="/app/components/test-app/test-app.controller.js"></script>
+  <script src="/app/components/token-app/token-app.controller.js"></script>
+
   <script src="/app/services/applicationService.js"></script>
   <script src="/app/services/authTokenService.js"></script>
   <script src="/app/services/accountService.js"></script>

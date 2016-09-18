@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CustomServiceRegistration.Domain.Context;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
@@ -18,6 +19,14 @@ namespace CustomServiceRegistration.Domain.Infrastructure.Repositories
         {
             _dataDbContext.Applications.Add(model);
             return await _dataDbContext.SaveChangesAsync();
+        }
+
+        public bool CheckIfAlreadyExist(Application model)
+        {
+            var checker =  _dataDbContext.Applications.FirstOrDefault(r => r.ApplicationName == model.ApplicationName);
+            if (checker == null)
+                return false;
+            return true;
         }
     }
 }

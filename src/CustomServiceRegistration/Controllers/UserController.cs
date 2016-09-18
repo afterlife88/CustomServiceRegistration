@@ -74,12 +74,12 @@ namespace CustomServiceRegistration.Controllers
         /// Creates a user in registration service.
         /// </summary>
         /// <param name="model"></param>
-        /// <response code="200">Returns if user created successfully</response>
+        /// <response code="201">Returns if user created successfully</response>
         /// <response code="400">Returns if some required fields are missing in request</response>
         /// <response code="500">Returns if server error has occurred</response>
         [HttpPost]
         [Route("register")]
-        [ProducesResponseType(typeof(OkResult), 200)]
+        [ProducesResponseType(typeof(StatusCodeResult), 201)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         [ProducesResponseType(typeof(InternalServerErrorResult), 500)]
         public async Task<IActionResult> Register([FromBody] RegistrationModel model)

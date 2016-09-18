@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using CustomServiceRegistration.Domain.Infrastructure.Contracts;
-using CustomServiceRegistration.Domain.Models;
+﻿using System;
+using System.Threading.Tasks;
+using System.Web.Http;
 using CustomServiceRegistration.Models;
+using CustomServiceRegistration.Services.Applications;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,25 +11,39 @@ namespace CustomServiceRegistration.Controllers
     [Route("api/[controller]")]
     public class ApplicationController : Controller
     {
-        private readonly IApplicationRepository _applicationRepository;
-        public ApplicationController(IApplicationRepository applicationRepository)
+        private readonly IApplicationService _applicationService;
+        public ApplicationController(IApplicationService applicationService)
         {
-            _applicationRepository = applicationRepository;
+            _applicationService = applicationService;
         }
         /// <summary>
         /// Add application to our service
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <response code="201">Returns if application created successfully</response>
+        /// <response code="400">Returns if application already exist or bad requested app name</response>
+        /// <response code="500">Returns if server error has occurred</response>
         [Route("create")]
         [HttpPost]
+        [ProducesResponseType(typeof(StatusCodeResult), 201)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        [ProducesResponseType(typeof(InternalServerErrorResult), 500)]
         public async Task<IActionResult> AddApplication([FromBody] ApplicationModel model)
         {
-            var app = new Application() { ApplicationName = model.Name };
+            try
+            {
+                var completed = await _applicationService.AddApplicationAsync(model.Name);
 
-            await _applicationRepository.Create(app);
-            return StatusCode(201);
-
+                if (completed)
+                {
+                    return StatusCode(201);
+                }
+                return BadRequest("Application with requested name already exist!");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

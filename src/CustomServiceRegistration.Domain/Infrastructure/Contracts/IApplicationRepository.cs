@@ -6,5 +6,6 @@ namespace CustomServiceRegistration.Domain.Infrastructure.Contracts
     public interface IApplicationRepository
     {
         Task<int> Create(Application model);
+        bool CheckIfAlreadyExist(Application model);
     }
 }

@@ -1,0 +1,27 @@
+﻿<form name="userForm" ng-submit='vm.submitToken(vm.applicationData)'>
+  <div layout-gt-sm="row">
+
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Application name</label>
+      <input flex="70" required name="name" ng-model="vm.applicationData.Name" />
+    </md-input-container>
+
+  </div>
+  <div layout-gt-sm="row" ng-if="vm.tokenRecived">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Token</label>
+      <input flex="70" name="token" ng-disabled="true" ng-model="vm.applicationData.Token" />
+      <md-button clipboard supported="supported" text="vm.applicationData.Token" class="md-primary md-hue-1">Copy token</md-button>
+    </md-input-container>
+  </div>
+  <div layout-gt-sm="row">
+    <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
+      {{vm.errorMsg}}
+    </div>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <md-button type="submit" class="md-raised md-primary">Get token</md-button>
+    </md-input-container>
+  </div>
+</form>

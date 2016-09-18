@@ -10,6 +10,11 @@
         controller: 'RegisterAppController',
         controllerAs: 'vm'
       })
+       .when('/token-app', {
+         templateUrl: './app/components/token-app/_token-app.html',
+         controller: 'TokenAppController',
+         controllerAs: 'vm'
+       })
       .when('/register-user',
       {
         templateUrl: './app/components/register-user/_register-user.html',
