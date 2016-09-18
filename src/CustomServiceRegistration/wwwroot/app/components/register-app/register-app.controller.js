@@ -14,16 +14,17 @@
     vm.submitRegistration = submitRegistration;
 
     function submitRegistration(data) {
-      return ApplicationService.create(data).then(function () {
-        AuthTokenService.applicationToken(data)
-          .then(function (result) {
-            vm.tokenRecived = true;
-            vm.applicationData.Token = 'Bearer ' + result.access_token;
-          });
-      }).catch(function (err) {
-        console.log(err);
-        vm.errorMsg = err;
-      });
+      return ApplicationService.create(data)
+        .then(function () {
+          AuthTokenService.applicationToken(data)
+            .then(function (result) {
+              vm.tokenRecived = true;
+              vm.applicationData.Token = 'Bearer ' + result.access_token;
+            }).catch(function (err) {
+              console.log(err);
+              vm.errorMsg = err;
+            });
+        });
     }
   }
 })(angular);

@@ -1,51 +1,50 @@
-﻿<div  id="popupContainer">
-  <form ng-submit='vm.submitRegistration(vm.registrationForm)'>
-    <div layout-gt-xs="row">
+﻿<form ng-submit='vm.submitRegistration(vm.registrationForm)'>
+  <div layout-gt-xs="row">
 
-      <md-input-container>
-        <label>User name</label>
-        <input type="text" name="login" required data-ng-model="vm.registrationForm.UserName">
-      </md-input-container>
-      <md-input-container>
-        <label>Email</label>
-        <input type="text" name="login" required data-ng-model="vm.registrationForm.Email">
-      </md-input-container>
-      <md-input-container>
-        <label>First Age</label>
-        <input type="number" name="age" required data-ng-model="vm.registrationForm.Age" />
-      </md-input-container>
-    </div>
-    <div layout-gt-xs="row">
-      <md-input-container>
-        <label>First Name</label>
-        <input type="text" name="firstName" required data-ng-model="vm.registrationForm.FirstName">
-      </md-input-container>
-      <md-input-container>
-        <label>Last Name</label>
-        <input type="text" name="lastName" required data-ng-model="vm.registrationForm.SecondName">
-      </md-input-container>
-      <md-input-container>
-        <label>Enter country name</label>
-        <input type="text" name="country" required data-ng-model="vm.registrationForm.CountryName" />
-      </md-input-container>
-    </div>
-    <div layout-gt-xs="row">
-      <md-input-container>
-        <label>Enter password</label>
-        <input type="password" name="pass" required data-ng-model="vm.registrationForm.Password">
-      </md-input-container>
-      <md-input-container>
-        <label>Enter password again</label>
-        <input type="password" name="repeated-pass" required data-ng-model="vm.registrationForm.ConfirmPassword">
-      </md-input-container>
-    </div>
-    <div layout-gt-xs="row">
-      <md-input-container>
-        <md-button type="submit" class="md-raised md-primary">Registrate</md-button>
-      </md-input-container>
-    </div>
-  </form>
-</div>
+    <md-input-container>
+      <label>User name</label>
+      <input type="text" name="login" required data-ng-model="vm.registrationForm.UserName">
+    </md-input-container>
+    <md-input-container>
+      <label>Email</label>
+      <input type="text" name="login" required data-ng-model="vm.registrationForm.Email">
+    </md-input-container>
+    <md-input-container>
+      <label>First Age</label>
+      <input type="number" name="age" required data-ng-model="vm.registrationForm.Age" />
+    </md-input-container>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <label>First Name</label>
+      <input type="text" name="firstName" required data-ng-model="vm.registrationForm.FirstName">
+    </md-input-container>
+    <md-input-container>
+      <label>Last Name</label>
+      <input type="text" name="lastName" required data-ng-model="vm.registrationForm.SecondName">
+    </md-input-container>
+    <md-input-container>
+      <label>Enter country name</label>
+      <input type="text" name="country" required data-ng-model="vm.registrationForm.CountryName" />
+    </md-input-container>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <label>Enter password</label>
+      <input type="password" name="pass" required data-ng-model="vm.registrationForm.Password">
+    </md-input-container>
+    <md-input-container>
+      <label>Enter password again</label>
+      <input type="password" name="repeated-pass" required data-ng-model="vm.registrationForm.ConfirmPassword">
+    </md-input-container>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <md-button type="submit" class="md-raised md-primary">Registrate</md-button>
+    </md-input-container>
+  </div>
+</form>
+
 <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
   {{vm.errorMsg}}
 </div>

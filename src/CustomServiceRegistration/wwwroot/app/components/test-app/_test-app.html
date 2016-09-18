@@ -1,0 +1,49 @@
+﻿<form name="userForm" ng-submit='vm.getUserInfo(vm.data)'>
+  <div layout-gt-sm="row">
+
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Set recived token of your registered application</label>
+      <input required name="token" ng-model="vm.data.Token" />
+    </md-input-container>
+  </div>
+  <div layout-gt-sm="row">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Set a user email whose information you want to receive</label>
+      <input required name="email" ng-model="vm.data.Email" />
+    </md-input-container>
+  </div>
+  <div layout-gt-sm="row" data-ng-show="vm.responseUserData.userName">
+  
+    <md-content flex layout-padding>
+      <h3>Recived user data:</h3>
+      <p class="md-body-2">
+        <b>User name</b>: {{vm.responseUserData.userName}}
+      </p>
+      <p class="md-body-2">
+        <b>Email</b>: {{vm.responseUserData.email}}
+      </p>
+      <p class="md-body-2">
+        <b>First name</b>: {{vm.responseUserData.firstName}}
+      </p>
+      <p class="md-body-2">
+        <b>Second name</b>: {{vm.responseUserData.secondName}}
+      </p>
+      <p class="md-body-2">
+        <b>Country</b>: {{vm.responseUserData.countryName}}
+      </p>
+      <p class="md-body-2">
+        <b>Age</b>: {{vm.responseUserData.age}}
+      </p>
+    </md-content>
+  </div>
+  <div layout-gt-sm="row">
+    <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
+      {{vm.errorMsg}}
+    </div>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <md-button type="submit" class="md-raised md-primary">Get user information from registration service</md-button>
+    </md-input-container>
+  </div>
+</form>

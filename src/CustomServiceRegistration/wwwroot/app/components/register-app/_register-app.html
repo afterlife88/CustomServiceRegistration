@@ -14,17 +14,23 @@
       <input flex="70" name="token" ng-disabled="true" ng-model="vm.applicationData.Token" />
       <md-button clipboard supported="supported" text="vm.applicationData.Token" class="md-primary md-hue-1">Copy token</md-button>
     </md-input-container>
-    
+
   </div>
   <md-content flex layout-padding>
     <p class="md-body-2">
       The result of the authentication our application is a token, which you have to put in the header of all calls the api.
-
+      <br />
+      <br />
       Create header <b>Authorization</b> with recived value above.
 
       All calls to the API are standard REST calls.
       <br />
-      For recive user data by email your must use token. 
+      For recive user data by email your must use token.
+      <br />
+      <br />
+      After pressing button above, starts two post requests on api first to register application to <b>api/application/create</b>
+      and second to recive token on <b>/api/token/</b> with with Content-Type': 'application/x-www-form-urlencoded'
+      where contains app name to recive token.
   </md-content>
   <div layout-gt-xs="row">
     <md-input-container>

@@ -6,8 +6,7 @@
   AuthTokenService.$inject = ['$http', '$q', 'spinner'];
 
   function AuthTokenService($http, $q, spinner) {
-
-    // Revealing Module Pattern
+   
     var AuthTokenService = {
       applicationToken: applicationToken
 
@@ -29,7 +28,6 @@
     }
     // private functions
     function genPostTokenBodyForApplication(credentials) {
-      console.log(credentials);
       return 'appname=' + credentials.Name;
     }
   }

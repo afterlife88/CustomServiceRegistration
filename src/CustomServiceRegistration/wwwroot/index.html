@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Custom registration service</title>
+
   <link href="../lib/angular-material/angular-material.css" rel="stylesheet" />
   <link href="../app/content/css/app.css" rel="stylesheet" />
   <link href="../app/content/css/spinner.css" rel="stylesheet" />
@@ -14,7 +15,7 @@
     <md-button class="menu" data-ng-click="vm.toggleList()" hide-gt-sm aria-label="Show menu">
       <md-icon md-svg-src="../app/content/svg/ic_menu_white_24px.svg"></md-icon>
     </md-button>
-    <h3>Custom service registration</h3>
+    <h2 style="padding-left: 10px;">Custom service registration</h2>
   </md-toolbar>
 
   <div class="container" layout="row" flex data-ng-controller="HomeController as vm">
@@ -39,6 +40,12 @@
           </md-button>
         </md-list-item>
         <md-list-item class="menu-button">
+          <md-button href="/#/test-app">
+            <md-icon md-svg-src="../app/content/svg/ic_desktop_windows_black_24px.svg"></md-icon>
+            Test as application
+          </md-button>
+        </md-list-item>
+        <md-list-item class="menu-button">
           <md-button href="/swagger/ui">
             <md-icon md-svg-src="../app/content/svg/ic_info_black_24px.svg"></md-icon>
             API Documentation
@@ -50,8 +57,6 @@
 
     </md-content>
   </div>
-
-  <!--<main data-ng-view=""></main>-->
   <!-- Angular vendors -->
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/angular-route/angular-route.min.js"></script>
@@ -69,7 +74,7 @@
   <script src="/app/components/register-app/register-app.controller.js"></script>
   <script src="/app/components/register-user/register-user.controller.js"></script>
   <script src="/app/dialogs-controllers/wait.dialog.controller.js"></script>
-
+  <script src="/app/components/test-app/test-app.controller.js"></script>
   <script src="/app/services/applicationService.js"></script>
   <script src="/app/services/authTokenService.js"></script>
   <script src="/app/services/accountService.js"></script>
