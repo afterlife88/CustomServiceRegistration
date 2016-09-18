@@ -59,13 +59,15 @@ namespace CustomServiceRegistration
 
             });
             //services.ReplaceDefaultViewEngine();
-            // for seeding the database with the demo user details
-            services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+         
+          
             // Set angular locations
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Add(new AngularAppViewLocationExpander());
             });
+            // for seeding the database with the demo user details
+            services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
