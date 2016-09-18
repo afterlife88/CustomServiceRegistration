@@ -9,8 +9,8 @@
 > - `cd src\CustomServiceRegistration`
 > - `bower install`
 > - `cd ..\..\`
-> - docker build -t app .
-> - docker run -p 8080:5000 -t app
+> - `docker build -t app .`
+> - `docker run -p 8080:5000 -t app`
 
 ## Описание проекта
 Проект являет собой сервис единой регистрации, позволяющую третьим лицам и приложениям доступ к данным пользователей.
