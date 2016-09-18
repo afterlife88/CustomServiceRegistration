@@ -33,7 +33,7 @@ namespace CustomServiceRegistration.Controllers
         /// <remarks>
         /// ## Important
         /// 
-        ///    <b>Request must have Authorize header with recived token or you will recive unauthorize
+        ///    <b>Request must have Authorization header with recived token or you will recive unauthorize
         ///    <br/>
         ///    So use postman or fiddler to add token to your header if you wanted to test, of try demo application that imitate all stuff that API does</b>
         /// 
