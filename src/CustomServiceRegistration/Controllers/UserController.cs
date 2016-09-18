@@ -36,7 +36,7 @@ namespace CustomServiceRegistration.Controllers
         /// <response code="401">Returns if authorize token are missing in header or token is wrong</response>
         /// <response code="404">Returns if passed user are not exist</response>
         /// <response code="500">Returns if server error has occurred</response>
-        [HttpGet("{userEmail}")]
+        [HttpGet("getUser/{userEmail}")]
         [ProducesResponseType(typeof(UserModel), 200)]
         [ProducesResponseType(typeof(UnauthorizedResult), 401)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -136,6 +136,30 @@ namespace CustomServiceRegistration.Controllers
                     return new NoContentResult();
                 }
                 return BadRequest(_userService.ModelState);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+     
+        [HttpGet("{userId}")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<IActionResult> GetUserById(string userId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return BadRequest();
+                }
+                var user = await _userService.GetUserById(userId);
+
+                if (user != null)
+                {
+                    return new ObjectResult(user);
+                }
+                return NotFound();
             }
             catch (Exception ex)
             {

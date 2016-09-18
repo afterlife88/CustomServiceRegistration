@@ -20,9 +20,8 @@
     };
 
     function getUserInfo(data) {
-      return AccountService.getUser(data.Email, data.Token).then(function (response) {
-        console.log(response);
-        console.log(response.data)
+      vm.errorMsg = '';
+      return AccountService.getUserByEmail(data.Email, data.Token).then(function (response) {
         vm.responseUserData.age = response.data.age.toString();
         vm.responseUserData.countryName = response.data.countryName;
         vm.responseUserData.email = response.data.email;

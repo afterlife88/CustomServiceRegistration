@@ -10,5 +10,6 @@ namespace CustomServiceRegistration.Services.Users
         ModelStateDictionary ModelState { get; }
         Task<bool> EditUserAsync(UserModel model);
         Task<UserModel> GetUser(string userEmail);
+        Task<UserModel> GetUserById(string userId);
     }
 }

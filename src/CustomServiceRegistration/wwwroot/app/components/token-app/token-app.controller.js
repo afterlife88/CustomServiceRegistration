@@ -14,6 +14,7 @@
     vm.submitToken = submitToken;
 
     function submitToken(data) {
+      vm.errorMsg = '';
       return AuthTokenService.applicationToken(data)
             .then(function (result) {
               vm.tokenRecived = true;

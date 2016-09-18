@@ -17,6 +17,10 @@ namespace CustomServiceRegistration.Domain.Infrastructure.Repositories
             _userManager = userManager;
         }
 
+        public async Task<ApplicationUser> GetUserByID(string userId)
+        {
+            return await _userManager.FindByIdAsync(userId);
+        }
         public async Task<ApplicationUser> GetUser(string userEmail)
         {
             return await _userManager.FindByEmailAsync(userEmail);

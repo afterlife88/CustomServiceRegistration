@@ -58,3 +58,8 @@ md-dialog {
     -o-transition: opacity .15s linear;
     transition: opacity .15s linear;
 }
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}

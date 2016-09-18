@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CustomServiceRegistration.Domain.Infrastructure.Contracts;
 using CustomServiceRegistration.Domain.Models;
 using CustomServiceRegistration.Models;
@@ -18,6 +19,11 @@ namespace CustomServiceRegistration.Services.Users
 
         public async Task<bool> CreateAsync(RegistrationModel model)
         {
+            if (model.UserName.Split(' ').Length == 2)
+            {
+                ModelState.AddModelError(string.Empty, "Username should not contain spaces!");
+                return false;
+            }
             var existingUser = await _userRepository.GetUserByNameAsync(model.UserName);
 
             if (existingUser != null)
@@ -68,6 +74,27 @@ namespace CustomServiceRegistration.Services.Users
         public async Task<UserModel> GetUser(string userEmail)
         {
             var user = await _userRepository.GetUser(userEmail);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userModel = new UserModel()
+            {
+                SecondName = user.SecondName,
+                CountryName = user.CountryName,
+                Age = user.Age,
+                FirstName = user.FirstName,
+                UserName = user.UserName,
+                Email = user.Email
+            };
+            return userModel;
+        }
+
+        public async Task<UserModel> GetUserById(string userId)
+        {
+            var user = await _userRepository.GetUserByID(userId);
 
             if (user == null)
             {

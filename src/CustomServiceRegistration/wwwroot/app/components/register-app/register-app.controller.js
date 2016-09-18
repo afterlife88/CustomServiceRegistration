@@ -14,6 +14,7 @@
     vm.submitRegistration = submitRegistration;
 
     function submitRegistration(data) {
+      vm.errorMsg = '';
       return ApplicationService.create(data)
         .then(function (response) {
           console.log(response);

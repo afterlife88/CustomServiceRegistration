@@ -9,7 +9,9 @@
 
     var accountService = {
       create: create,
-      getUser: getUser
+      getUserByEmail: getUserByEmail,
+      getUserById: getUserById,
+      update: update
     };
 
     return accountService;
@@ -25,9 +27,21 @@
           return $q.reject(data);
         });
     }
-    function getUser(email, token) {
+    function update(user, token) {
       spinner.showWait();
-      return $http.get('api/User/' + email,
+      return $http.put('api/user/update', user, {
+        headers: { 'Authorization': token }
+      }).then(function (response) {
+        spinner.hideWait();
+        return response;
+      }).catch(function (data) {
+        spinner.hideWait();
+        return $q.reject(data);
+      });
+    }
+    function getUserByEmail(email, token) {
+      spinner.showWait();
+      return $http.get('api/User/getUser/' + email,
       {
         headers: { 'Authorization': token }
       }).then(function (response) {
@@ -36,7 +50,19 @@
       }).catch(function (data) {
         spinner.hideWait();
         return $q.reject(data);
-      });;
+      });
     }
+    function getUserById(userId) {
+      spinner.showWait();
+      return $http.get('api/User/' + userId
+      ).then(function (response) {
+        spinner.hideWait();
+        return response;
+      }).catch(function (data) {
+        spinner.hideWait();
+        return $q.reject(data);
+      });
+    }
+
   }
 })();

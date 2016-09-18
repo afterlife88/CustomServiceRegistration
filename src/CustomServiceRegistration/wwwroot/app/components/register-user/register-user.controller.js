@@ -3,30 +3,22 @@
 
   angular.module('app').controller('RegisterUserController', RegisterUserController);
 
-  RegisterUserController.$inject = ['AccountService', '$mdDialog'];
+  RegisterUserController.$inject = ['AccountService'];
 
-  function RegisterUserController(AccountService, $mdDialog) {
+  function RegisterUserController(AccountService) {
 
     var vm = this;
     vm.errorMsg = '';
     vm.registrationForm = {};
     vm.submitRegistration = submitRegistration;
+    vm.created = false;
 
     function submitRegistration(data) {
+      vm.errorMsg = '';
+      vm.created = false;
       return AccountService.create(data).then(function (result) {
-        function showAlert(ev) {
-          $mdDialog.show(
-            $mdDialog.alert()
-              .clickOutsideToClose(true)
-              .title('Complete')
-              .textContent('User created successfully.')
-              .ariaLabel('Created user')
-              .ok('Close')
-              .targetEvent(ev)
-          );
-        };
-        showAlert();
-        vm.registrationForm = {};
+        console.log(result);
+        vm.created = true;
       }).catch(function (err) {
         console.log(err);
         vm.errorMsg = err;

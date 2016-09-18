@@ -3,3 +3,72 @@
     <h2 class="md-flex">Login and edit your user data</h2>
   </div>
 </md-toolbar>
+<br />
+<form name="userForm" ng-submit='vm.submitLogin(vm.loginData)' ng-if="!vm.isLogged">
+  <div layout-gt-sm="row">
+
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>User name</label>
+      <input required name="token" ng-model="vm.loginData.login" />
+    </md-input-container>
+  </div>
+  <div layout-gt-sm="row">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Password</label>
+      <input type="password" required name="email" ng-model="vm.loginData.password" />
+    </md-input-container>
+  </div>
+
+  <div layout-gt-sm="row">
+    <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
+      {{vm.errorMsg}}
+    </div>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <md-button type="submit" class="md-raised md-primary">Login</md-button>
+    </md-input-container>
+  </div>
+</form>
+
+<form ng-submit='vm.updateUser(vm.responseUserData, vm.userToken)' ng-if="vm.isLogged">
+  <input type="hidden" data-ng-model="vm.userToken" />
+  <input type="hidden" data-ng-model="vm.responseUserData.UserName" />
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <label>Email</label>
+      <input type="text" name="login" required data-ng-model="vm.responseUserData.Email">
+    </md-input-container>
+    <md-input-container>
+      <label>Age</label>
+      <input type="number" name="age" required data-ng-model="vm.responseUserData.Age" />
+    </md-input-container>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <label>First Name</label>
+      <input type="text" name="firstName" required data-ng-model="vm.responseUserData.FirstName">
+    </md-input-container>
+    <md-input-container>
+      <label>Last Name</label>
+      <input type="text" name="lastName" required data-ng-model="vm.responseUserData.SecondName">
+    </md-input-container>
+    <md-input-container>
+      <label>Enter country name</label>
+      <input type="text" name="country" required data-ng-model="vm.responseUserData.CountryName" />
+    </md-input-container>
+  </div>
+  <div layout-gt-sm="row">
+    <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
+      {{vm.errorMsg}}
+    </div>
+    <div class="alert alert-success fade in margin-top-20" data-ng-show="vm.updated">
+      User updated successfully
+    </div>
+  </div>
+  <div layout-gt-xs="row">
+    <md-input-container>
+      <md-button type="submit" class="md-raised md-primary">Update</md-button>
+    </md-input-container>
+  </div>
+</form>

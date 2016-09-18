@@ -21,6 +21,12 @@
         controller: 'RegisterUserController',
         controllerAs: 'vm'
       })
+      .when('/user-app',
+      {
+        templateUrl: './app/components/user-app/_user-app.html',
+        controller: 'UserAppController',
+        controllerAs: 'vm'
+      })
       .when('/test-app',
       {
         templateUrl: './app/components/test-app/_test-app.html',

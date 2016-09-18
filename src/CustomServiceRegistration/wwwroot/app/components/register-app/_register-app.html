@@ -35,7 +35,7 @@
       <br />
       After pressing button above, starts two post requests on api first to register application to <b>api/application/create</b>
       and second to recive token on <b>/api/token/</b> with with Content-Type': 'application/x-www-form-urlencoded'
-      where contains app name to recive token.
+      where body of request is <b>appname={applicationName}</b>.
   </md-content>
   <div layout-gt-sm="row">
     <div class="alert alert-danger fade in margin-top-20" data-ng-show="vm.errorMsg">
