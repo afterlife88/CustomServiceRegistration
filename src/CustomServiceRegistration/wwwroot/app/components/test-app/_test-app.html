@@ -1,4 +1,16 @@
 ﻿<form name="userForm" ng-submit='vm.getUserInfo(vm.data)'>
+
+  <md-content flex layout-padding>
+    <p class="md-body-2">
+      Just a demo to imitate third party app.
+      <br />
+      Bottom token input will be setted up in <b>Authorization</b> header of http request.
+      <br />
+      User email will be parameter to request.
+      <br />
+      <br />
+      <b>Requesting url in API: api/User/{userEmail}</b>
+  </md-content>
   <div layout-gt-sm="row">
 
     <md-input-container class="md-block" flex-gt-sm>
@@ -13,7 +25,7 @@
     </md-input-container>
   </div>
   <div layout-gt-sm="row" data-ng-show="vm.responseUserData.userName">
-  
+
     <md-content flex layout-padding>
       <h3>Recived user data:</h3>
       <p class="md-body-2">
