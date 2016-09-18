@@ -1,4 +1,4 @@
-#Customer service registration
+#Custom service registration
 ### DevChallenge 2016 fall, back-end qualification round
 
 ## Запуск приложения через загрузку образа с docker hub
@@ -10,7 +10,7 @@
 > - docker run -p 8080:5000 -t app
 
 ## Описание проекта
-Проект являет собой единную регистрацию, позволяющую третьим лицам и приложениям доступ к данным пользователей.
+Проект являет собой сервис единой регистрации, позволяющую третьим лицам и приложениям доступ к данным пользователей.
 Используемые технологии:
 - **Серверная часть:** ASP.NET Core, Entity Framework Core, MS SQL, Swagger (для авто документации API), XUnit, Moq.
 - **Клиент:** AngularJS, Angular Material (для красивого отображения в стиле Material design).
