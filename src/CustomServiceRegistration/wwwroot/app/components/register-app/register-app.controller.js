@@ -15,6 +15,7 @@
 
     function submitRegistration(data) {
       vm.errorMsg = '';
+      vm.tokenRecived = false;
       return ApplicationService.create(data)
         .then(function (response) {
           console.log(response);

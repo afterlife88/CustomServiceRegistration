@@ -21,6 +21,14 @@
 
     function getUserInfo(data) {
       vm.errorMsg = '';
+      vm.responseUserData = {
+        age: '',
+        countryName: '',
+        email: '',
+        firstName: '',
+        secondName: '',
+        userName: ''
+      };
       return AccountService.getUserByEmail(data.Email, data.Token).then(function (response) {
         vm.responseUserData.age = response.data.age.toString();
         vm.responseUserData.countryName = response.data.countryName;
