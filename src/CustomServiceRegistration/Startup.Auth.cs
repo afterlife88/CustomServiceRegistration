@@ -18,8 +18,8 @@ namespace CustomServiceRegistration
 {
     public partial class Startup
     {
-        // The secret key every token will be signed with.
-        private static readonly string secretKey = "tS6rP8Q5yz78Fdlkscg96Gj5TCI0Vsfl";
+         // TODO: generate some secret key every token will be signed with.
+        private static readonly string secretKey = "";
 
         private void ConfigureAuth(IApplicationBuilder app, IServiceProvider services)
         {

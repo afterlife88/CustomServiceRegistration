@@ -23,8 +23,9 @@ namespace CustomServiceRegistration
     {
         public void ConfigureServices(IServiceCollection services)
         {
+        	// TODO: pass connection string to your database        	
             var connection =
-                @"Server=tcp:itcompetitions.database.windows.net,1433;Database=devchallenge;User ID=admin@yo.com@itcompetitions;Password=nLcJZ8i9;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                @"";
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer(connection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(
@@ -100,7 +101,7 @@ namespace CustomServiceRegistration
             app.UseMvcWithDefaultRoute();
 
             // Recreate db's
-            //databaseInitializer.Seed().GetAwaiter().GetResult();
+            databaseInitializer.Seed().GetAwaiter().GetResult();
         }
 
         private string GetXmlCommentsPath(ApplicationEnvironment appEnvironment)
