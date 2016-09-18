@@ -12,3 +12,9 @@
 
 **Docker swarm** использует **Round-robin** алгоритм для распределения нагрузки между контейнерами.
 После этого настроим обратный прокси на сервере. На конфигурации IIS выбираем **Add Rule(s)**, **Reverse proxy** и пишем туда адресс ноды докера, по дефолту это **10.0.75.2:8080**. Готово.
+
+Для уменьшения контейнеров используем:
+> `docker service scale custom-registration-service=0`
+
+Для удаления сервиса:
+> `docker service rm custom-registration-service`
