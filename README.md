@@ -6,6 +6,9 @@
 > - Запустите localhost:8080 в браузере, если порт занят, замените в docker run 8080 на любой другой порт и запустите команду еще раз.
 
 ## Альтернативный путь сборки и запуска через docker
+> - `cd src\CustomServiceRegistration`
+> - `bower install`
+> - `cd ..`, `cd ..`
 > - docker build -t app .
 > - docker run -p 8080:5000 -t app
 
