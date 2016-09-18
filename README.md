@@ -19,3 +19,8 @@
 - **CustomServiceRegistration.Domain** - так как в проекте применяется ORM Entity Framework Core, работа с данными была вынесена в отдельный проект, чтобы разграничить ответственность. Был применен паттерн Repository, интерфейс и реализацию вы можете увидеть в папке **Infrastructure**. Были применены миграции для расширения проекта и постоянного апдейта структуры базы данных через новые миграции, в папке **Migrations** находятся автосгенерированые классы после обновления моделей.
 - **CustomServiceRegistration.Tests** - в папке **UnitTests** содержатся тесты, отвечающие за апрув основной базовой логики контроллеров. В папке **IntegrationTests** содержатся тесты, которые отправляют запросы на мок-сервер, аналогичный по конфигурации тому, который содержится в главном приложении. В **UserControllerTest** находятся два теста на проверку отправленного запроса на взятие данных пользователя с токеном и без него.
 - **CustomServiceRegistration.TokenProvider** - проект, отвечающий за верификацию и генерацию OAuth2 токенов юзерам и приложениям, зарегистрированным в сервисе.
+
+## Завимости в проекте
+- **CustomServiceRegistration** -> CustomServiceRegistration.Domain, CustomServiceRegistration.TokenProvider
+- **CustomServiceRegistration.Tests** ->  CustomServiceRegistration
+- **CustomServiceRegistration.TokenProvider** -> CustomServiceRegistration.Domain
