@@ -8,7 +8,7 @@
 ## Альтернативный путь сборки и запуска через docker
 > - `cd src\CustomServiceRegistration`
 > - `bower install`
-> - `cd ..`, `cd ..`
+> - `cd ..\..\`
 > - docker build -t app .
 > - docker run -p 8080:5000 -t app
 
