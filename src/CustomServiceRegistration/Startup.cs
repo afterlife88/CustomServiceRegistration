@@ -97,7 +97,8 @@ namespace CustomServiceRegistration
             app.UseSwaggerUi();
             app.UseMvcWithDefaultRoute();
 
-            databaseInitializer.Seed().GetAwaiter().GetResult();
+            // Recreate db's
+            //databaseInitializer.Seed().GetAwaiter().GetResult();
         }
 
         private string GetXmlCommentsPath(ApplicationEnvironment appEnvironment)
