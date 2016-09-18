@@ -30,6 +30,14 @@ namespace CustomServiceRegistration.Controllers
         /// <summary>
         /// Return user data
         /// </summary>
+        /// <remarks>
+        /// ## Important
+        /// 
+        ///    <b>Request must have Authorize header with recived token or you will recive unauthorize
+        ///    <br/>
+        ///    So use postman or fiddler to add token to your header if you wanted to test, of try demo application that imitate all stuff that API does</b>
+        /// 
+        /// </remarks>
         /// <param name="userEmail"></param>
         /// <response code="200">Return user data</response>
         /// <response code="400">Returns if passed value invalid</response>
@@ -73,6 +81,11 @@ namespace CustomServiceRegistration.Controllers
         /// <summary>
         /// Creates a user in registration service.
         /// </summary>
+        /// <remarks>
+        /// 
+        /// <b>Creating the user in service</b>
+        /// 
+        /// </remarks>
         /// <param name="model"></param>
         /// <response code="201">Returns if user created successfully</response>
         /// <response code="400">Returns if some required fields are missing in request</response>
@@ -106,6 +119,18 @@ namespace CustomServiceRegistration.Controllers
         /// <summary>
         /// Updating user data
         /// </summary>
+        /// <remarks>
+        /// 
+        /// Updating the user in the service. 
+        /// <br/>
+        /// You need to add specific token that our recive after requesting <b>/api/token</b> with
+        /// <br />
+        /// Content-Type: <b>'application/x-www-form-urlencoded'</b> 
+        /// <br />
+        /// And in request body set <b>login</b> and <b>password</b> with your specific values
+        /// 
+        /// If token will not be granted you will recive 401.
+        /// </remarks>
         /// <param name="model"></param>
         /// <response code="204">Return if updated successfully</response>
         /// <response code="400">Returns if passed value invalid</response>
@@ -142,7 +167,7 @@ namespace CustomServiceRegistration.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-     
+
         [HttpGet("{userId}")]
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IActionResult> GetUserById(string userId)
