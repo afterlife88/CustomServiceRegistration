@@ -23,10 +23,7 @@ namespace CustomServiceRegistration
     {
         public void ConfigureServices(IServiceCollection services)
         {
-        	// TODO: pass connection string to your database        	
-            var connection =
-                @"";
-            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<DataDbContext>(options => options.UseInMemoryDatabase());
 
             services.AddIdentity<ApplicationUser, IdentityRole>(
                     pass =>
@@ -60,8 +57,8 @@ namespace CustomServiceRegistration
 
             });
             //services.ReplaceDefaultViewEngine();
-         
-          
+
+
             // Set angular locations
             services.Configure<RazorViewEngineOptions>(options =>
             {

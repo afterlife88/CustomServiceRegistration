@@ -16,7 +16,8 @@
     "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.1",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "CustomServiceRegistration.TokenProvider": "1.0.0-*",
-    "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0"
+    "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.1"
   },
 
   "tools": {
