@@ -13,8 +13,8 @@
 > - `docker run -p 8080:5000 -t app`
 
 ## Technologies used:
-- **Backend** ASP.NET Core, Entity Framework Core, MS SQL, Swagger (для авто документации API), XUnit, Moq.
-- **Frontend:** AngularJS, Angular Material (для красивого отображения в стиле Material design).
+- **Backend** ASP.NET Core, Entity Framework Core, MS SQL, Swagger (Auto-generated documentation for API), XUnit, Moq.
+- **Frontend:** AngularJS, Angular Material (for a beautiful view in Material design).
 
 ## Internal dependencies
 - **CustomServiceRegistration** -> CustomServiceRegistration.Domain, CustomServiceRegistration.TokenProvider
