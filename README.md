@@ -3,7 +3,7 @@
 
 ## Pull image of application from docker hub and run on 8080 port:
 > - **docker run -p 8080:5000 devchallenge/custom-registration-service**
-> - Запустите localhost:8080 в браузере, если порт занят, замените в docker run 8080 на любой другой порт и запустите команду еще раз.
+> - Run localhost:8080 in the browser, if the port is busy, change `8080` in `docker run` command to any available port and run again.
 
 ## Alternative way - build from sources and run:
 > - `cd src\CustomServiceRegistration`
