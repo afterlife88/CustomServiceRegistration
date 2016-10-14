@@ -1,4 +1,6 @@
 #Custom service registration
+> - [Russian readme](https://github.com/Afterlife88/CustomServiceRegistration/blob/master/README-ru-ru.md)
+
 ### DevChallenge 2016 fall, back-end qualification round
 
 ## Pull image of application from docker hub and run on 8080 port:
